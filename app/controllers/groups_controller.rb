@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  validates :title, presence: true
+  
   def index
     @groups = Group.all
   end
