@@ -1,9 +1,12 @@
 <div class="col-md-12">
-  <% if current_user && current_user == @group.user %>
+
   <div class="group">
+    <%= link_to "留言", new_group_post_path(@group), class: "btn btn-primary pull-right"%>
+    <% if current_user && current_user == @group.user %>
     <%= link_to("Edit", edit_group_path(@group),class: "btn btn-primary pull-right")%>
+    <% end %>
   </div>
-  <% end %>
+
   <h2><%= @group.title %></h2>
   <p><%= @group.description %></p>
 </div>
