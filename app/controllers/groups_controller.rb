@@ -12,6 +12,8 @@ class GroupsController < ApplicationController
     @posts = @group.posts.recent.paginate(:page => params[:page], :per_page =>5 )
   end
 
+
+
   def edit
     find_id_and_check_permission
   end
@@ -45,6 +47,20 @@ class GroupsController < ApplicationController
     @group.destroy
     flash[:alert]="Group deleted"
     redirect_to groups_path
+  end
+
+  def join
+    @group = Group.find(params[:id])
+    current_user.join!(@group)
+    flash[:notice] = "加入成功"
+    redirect_to group_path(@group)
+  end
+
+  def quit
+    @group = Group.find(params[:id])
+    current_user.quit!(@group)
+    flash[:alert] = "已经退出本论坛"
+    redirect_to group_path(@group)
   end
 
   private
