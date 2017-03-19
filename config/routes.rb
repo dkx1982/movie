@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   # root 'welcome#index'
   root 'groups#index'
+
+  namespace :account do
+    resources :groups
+  end
+
   resources :groups do
     member do
       post :join

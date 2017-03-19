@@ -2,7 +2,12 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create]
   def new
     @group =Group.find(params[:group_id])
+    if !current_user.is_member_of?(@group)
+      flash[:alert] = "不好意思！你需要加入本讨论群"
+      redirect_to group_path(@group)
+    else
     @post = Post.new
+    end
   end
   def create
     @group = Group.find(params[:group_id])
