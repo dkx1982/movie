@@ -46,6 +46,7 @@ class GroupsController < ApplicationController
 
   def destroy
     find_id_and_check_permission
+    @group.posts.delete_all
     @group.destroy
     flash[:alert]="Group deleted"
     redirect_to groups_path
